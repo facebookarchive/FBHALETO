@@ -1,0 +1,49 @@
+% Copyright (C) 2018-present, Facebook, Inc.
+%
+% This program is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; version 2 of the License.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along
+% with this program; if not, write to the Free Software Foundation, Inc.,
+% 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+%
+
+[System]
+Name='traj_planner_altrate'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=3
+AndMethod='prod'
+OrMethod='probor'
+ImpMethod='prod'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='dAz'
+Range=[0 3.14159265358979]
+NumMFs=3
+MF1='ZERO':'gbellmf',[0.7285 2.5 1.388e-17]
+MF2='HALFPI':'gbellmf',[0.5752 1.5707963267949 1.518]
+MF3='PI':'gbellmf',[0.6284 2.3 3.042]
+
+[Output1]
+Name='AltRateCmd'
+Range=[-0.8 0.8]
+NumMFs=3
+MF1='NEG':'sigmf',[-6.63 -0.3262]
+MF2='ZERO':'gaussmf',[0.16 0]
+MF3='POS':'sigmf',[6.63 0.326204081632653]
+
+[Rules]
+1, 1 (1) : 1
+3, 3 (1) : 1
+2, 2 (1) : 1
