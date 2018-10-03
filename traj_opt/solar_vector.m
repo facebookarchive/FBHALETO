@@ -1,3 +1,5 @@
+% Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+
 function [sun_az, sun_el, jd] = solar_vector(t, lat, lon, alt)
 % sun = sun_position(time, location)
 %:
